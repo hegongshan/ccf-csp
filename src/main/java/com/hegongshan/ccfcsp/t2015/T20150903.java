@@ -16,9 +16,8 @@ public class T20150903 {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		// 保存输入的数据
-		int[] arr = toIntArray(scan.nextLine());
-		int templateRows = arr[0];
-		int varRows = arr[1];
+		int templateRows = scan.nextInt();
+		int varRows = Integer.parseInt(scan.nextLine().trim());
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < templateRows; i++) {
 			sb.append(scan.nextLine());
@@ -27,9 +26,14 @@ public class T20150903 {
 			}
 		}
 		Map<String, String> map = new HashMap<>();
+		int index;
 		for (int i = 0; i < varRows; i++) {
-			String[] sArr = scan.nextLine().split(" \"");
-			map.put(sArr[0], deleteQuote(sArr[1]));
+			String keyValue = scan.nextLine();
+			index = keyValue.indexOf(" ");
+			String key = keyValue.substring(0,index);
+			//从第一个空格之后截取，并去掉首尾的双引号
+			String value = keyValue.substring(index+2,keyValue.length()-1);
+			map.put(key,value);
 		}
 		scan.close();
 		// 使用正则表达式替换模板变量
@@ -43,30 +47,5 @@ public class T20150903 {
 		}
 		m.appendTail(sbuff);
 		System.out.println(sbuff);
-	}
-
-	// 根据空格切分字符串，并将其转换为整型数组
-	private static int[] toIntArray(String str) {
-		String[] temp = str.split(" ");
-		int[] intArray = new int[temp.length];
-		for (int i = 0; i < intArray.length; i++) {
-			intArray[i] = Integer.parseInt(temp[i]);
-		}
-		return intArray;
-	}
-
-	// 删除首尾的引号
-	private static String deleteQuote(String s) {
-		if (s == null || s.trim().isEmpty()) {
-			return "";
-		}
-		if (s.startsWith("\"") && s.endsWith("\"")) {
-			return s.substring(1, s.length() - 1);
-		} else if (s.startsWith("\"")) {
-			return s.substring(1);
-		} else if (s.endsWith("\"")) {
-			return s.substring(0, s.length() - 1);
-		}
-		return s;
 	}
 }
