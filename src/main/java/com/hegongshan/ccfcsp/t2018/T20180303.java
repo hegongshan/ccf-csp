@@ -1,4 +1,4 @@
-package com.hegongshan.ccfcsp;
+package com.hegongshan.ccfcsp.t2018;
 
 import java.util.Scanner;
 
