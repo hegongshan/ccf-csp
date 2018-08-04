@@ -12,7 +12,7 @@ public class T20170903 {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		int line = scan.nextInt();
-		int count = scan.nextInt();
+		int count = Integer.parseInt(scan.nextLine().trim());
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < line ; i++) {
 			sb.append(scan.nextLine());
@@ -51,23 +51,6 @@ public class T20170903 {
 					}
 				}
 			}
-			/*if(!json.contains(s)) {
-				System.out.println("NOTEXIST");
-			} else {
-				if(json.charAt(json.indexOf("\""+s+"\"")+("\""+s+"\"").length()+2) == '{') {
-					System.out.println("OBJECT");
-				} else {
-					String[] keyAndValues = json.split(",");
-					for (int i = 0; i < keyAndValues.length; i++) {
-						String key = keyAndValues[i].split(":")[0];
-						String value = keyAndValues[i].split(":")[1];
-						if(key.substring(1,key.length()-1).equals(s)) {
-							System.out.println("STRING "+value.substring(1,value.length()-1));
-							break;
-						}
-					}
-				}
-			}*/
 		}
 	}
 	
@@ -75,16 +58,20 @@ public class T20170903 {
 		private Map<String,Object> map = new HashMap<>();
 		
 		JSONObject fromString(String str) {
-			String[] keyAndValues = str.trim().split(",");
+			String[] keyAndValues = delte(str).split(",");
 			for (int i = 0; i < keyAndValues.length; i++) {
+				System.out.println(keyAndValues[i]);
 				String[] kv = keyAndValues[i].split(":");
-				String key = kv[0].trim().substring(1, kv[0].trim().length()-1);
-				System.out.println(kv[1]);
-				String value = kv[1].trim().startsWith("{") ? kv[1].trim() : kv[1].trim().substring(1,kv[1].trim().length()-1);
+				String key = delete0(kv[0]);
+				System.out.println("key:"+key);
+				String value = delete0(kv[1]);
+				System.out.println("value:"+value);
 				if(!isJSON(value)) {
 					map.put(key,value);
 				} else {
-					map.put(key, fromString(value));
+					JSONObject jsonObj = fromString(value);
+					map.put(key, jsonObj);
+					System.out.println(jsonObj);
 				}
 			}
 			return this;
@@ -92,6 +79,10 @@ public class T20170903 {
 		}
 		
 		boolean isJSON(String str) {
+			str = str.trim();
+			if(!str.startsWith("{") || !str.endsWith("}")) {
+				return false;
+			}
 			Stack<Character> stack = new Stack<>();
 			char[] charArr = str.toCharArray();
 			for (int i = 0; i < charArr.length; i++) {
@@ -110,6 +101,38 @@ public class T20170903 {
 		
 		Object getValue(String key) {
 			return map.get(key);
+		}
+		
+		private String delte(String str) {
+			str = str.trim();
+			if(str.startsWith("{")) {
+				str = str.substring(1);
+			}
+			if(str.endsWith("}")) {
+				str = str.substring(0,str.length()-1);
+			}
+			return str;
+		}
+		
+		private String delete0(String str) {
+			str = str.trim();
+			if(str.startsWith("\"")) {
+				str = str.substring(1);
+			}
+			if(str.endsWith("\"")) {
+				str = str.substring(0,str.length()-1);
+			}
+			return str;
+		}
+		
+		@Override
+		public String toString() {
+			StringBuilder sb = new StringBuilder("{");
+			map.forEach((k,v)->{
+				sb.append("\""+k+"\""+":"+"\""+v+"\"");	
+			});
+			sb.append("}");
+			return sb.toString();
 		}
 	}
 	

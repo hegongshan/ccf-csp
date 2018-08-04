@@ -28,7 +28,7 @@ public class T20150903 {
 		Map<String, String> map = new HashMap<>();
 		int index;
 		for (int i = 0; i < varRows; i++) {
-			String keyValue = scan.nextLine();
+			String keyValue = scan.nextLine().trim();
 			index = keyValue.indexOf(" ");
 			String key = keyValue.substring(0,index);
 			//从第一个空格之后截取，并去掉首尾的双引号
@@ -37,7 +37,7 @@ public class T20150903 {
 		}
 		scan.close();
 		// 使用正则表达式替换模板变量
-		Pattern p = Pattern.compile("\\{\\{\\s*\\w+\\s*}\\}");
+		Pattern p = Pattern.compile("\\{\\{ \\w+ }\\}");
 		Matcher m = p.matcher(sb);
 		StringBuffer sbuff = new StringBuffer();
 		while (m.find()) {

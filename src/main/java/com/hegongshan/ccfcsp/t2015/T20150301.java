@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 /**
  * 图像旋转
+ * 
  * @author hegongshan
  *
  */
@@ -20,12 +21,12 @@ public class T20150301 {
 			}
 		}
 		scan.close();
-		
-		//原来的行变为现在的列，且元素倒排
+
+		// 原来的行变为现在的列，且元素倒排
 		int index = column;
 		for (int i = 0; i < column; i++) {
 			for (int j = 0; j < row; j++) {
-				System.out.print(arr[j][index-1]+" ");
+				System.out.print(arr[j][index - 1] + " ");
 			}
 			index--;
 			System.out.println();
