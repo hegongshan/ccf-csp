@@ -16,3 +16,11 @@
 * [201503-2 数字排序](https://github.com/hegongshan/ccf-csp/blob/master/src/main/java/com/hegongshan/ccfcsp/t2015/T20150302.java) 100分
 * [201512-1 数位之和](https://github.com/hegongshan/ccf-csp/blob/master/src/main/java/com/hegongshan/ccfcsp/t2015/T20151201.java) 100分
 
+
+
+| 题号     | 题目名称   | C      | Java | Python3 |
+| -------- | ---------- | ------ | ---- | ------- |
+| 202104-1 | 灰度直方图 | [20]() |      |         |
+|          |            |        |      |         |
+|          |            |        |      |         |
+
