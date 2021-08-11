@@ -11,9 +11,7 @@ public class Main {
 		int cur = 0;
 		while (cnt <= n) {
 			if (isSkip(++cur)) {
-				// 甲 => 0, ..., 丁 => 3
-				int idx = cur % 4;
-				arr[idx > 0 ? idx - 1 : idx + 3]++;
+				arr[(cur - 1) % 4]++;
 			} else {
 				cnt ++;
 			}
