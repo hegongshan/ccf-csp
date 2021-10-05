@@ -19,6 +19,5 @@ def main():
 	print(max_sum, min_sum, sep='\n')
 
 
-
 if __name__ == '__main__':
 	main()
